@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout';
 import { Cast } from './Cast';
 import { Reviews } from './Reviews';
-import { NotFound } from './NotFound';
+import { NotFound } from '../pages/NotFound';
 
 export const App = () => {
   return (
