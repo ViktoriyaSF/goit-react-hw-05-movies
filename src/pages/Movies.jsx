@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { fetchSearchMovies } from 'service/api-movies';
 
 const Movies = () => {
-  const [movies, setMovies] = useState([
-    'movie-1',
-    'movie-2',
-    'movie-3',
-    'movie-4',
-  ]);
+  const [movies, setMovies] = useState([]);
 
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const [searchParams, setSearchParams] = useSearchParams();
   //або значення або пустий рядок
   const movieId = searchParams.get('movieId') ?? '';
+
+  useEffect(() => {
+    if (movieId === '' || movieId === null) return;
+    const getMovies = async () => {
+      const { results } = await fetchSearchMovies(movieId);
+      console.log(results);
+      setMovies(results);
+    };
+
+    getMovies();
+  }, [movieId]);
 
   const updateQueryString = evt => {
     const movieSearchValue = evt.target.value;
@@ -23,17 +30,16 @@ const Movies = () => {
     }
     setSearchParams({ movieId: movieSearchValue });
   };
-
-  const visibleMovies = movies.filter(movie => movie.includes(movieId));
+  console.log(movieId);
 
   return (
     <div>
       <input type="text" value={movieId} onChange={updateQueryString} />
-      {visibleMovies.map(movie => {
+      {movies.map(movie => {
         return (
-          <li key={movie}>
-            <Link to={`${movie}`} state={{ from: location }}>
-              {movie}
+          <li key={movie.id}>
+            <Link to={`${movie.id}`} state={{ from: location }}>
+              {movie.title || movie.name}
             </Link>
           </li>
         );

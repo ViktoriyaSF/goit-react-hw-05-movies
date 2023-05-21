@@ -7,9 +7,9 @@ const MovieDetails = () => {
 
   const { movieId } = useParams();
   // console.log(movieId);
-  console.log(location);
-  console.log(location.state);
-  console.log(backLinLocationRef.current);
+  // console.log(location);
+  // console.log(location.state);
+  // console.log(backLinLocationRef.current);
   return (
     <>
       <div> MovieDetails :{movieId}</div>
