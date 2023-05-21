@@ -3,17 +3,17 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
   const location = useLocation();
-  const backLinLocationkRef = useRef(location.state?.from ?? '/movies');
+  const backLinLocationRef = useRef(location.state?.from ?? '/movies');
 
   const { movieId } = useParams();
   // console.log(movieId);
-  console.log(backLinLocationkRef.current);
-  console.log(location.state?.from);
   console.log(location);
+  console.log(location.state);
+  console.log(backLinLocationRef.current);
   return (
     <>
       <div> MovieDetails :{movieId}</div>
-      <Link to={backLinLocationkRef.current}>RETURN</Link>
+      <Link to={backLinLocationRef.current}>RETURN</Link>
       <ul>
         <li>
           <Link to="cast"> cast ✨</Link>

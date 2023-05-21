@@ -8,25 +8,27 @@ const Movies = () => {
     'movie-3',
     'movie-4',
   ]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  //або значення або пустий рядок
-  const movieId = searchParams.get('movieId') ?? '';
-
-  const visibleMovies = movies.filter(movie => movie.includes(movieId));
-
-  const updateQueryString = evt => {
-    if (evt.target.value === '') {
-      return setSearchParams({});
-    }
-    setSearchParams({ movieId: evt.target.value });
-  };
 
   const location = useLocation();
   console.log(location);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  //або значення або пустий рядок
+  const movieId = searchParams.get('movieId') ?? '';
+
+  const updateQueryString = evt => {
+    const movieSearchValue = evt.target.value;
+    if (movieSearchValue === '') {
+      return setSearchParams({});
+    }
+    setSearchParams({ movieId: movieSearchValue });
+  };
+
+  const visibleMovies = movies.filter(movie => movie.includes(movieId));
+
   return (
     <div>
-      <input type="text" value={movieId} onChange={updateQueryString}></input>
+      <input type="text" value={movieId} onChange={updateQueryString} />
       {visibleMovies.map(movie => {
         return (
           <li key={movie}>

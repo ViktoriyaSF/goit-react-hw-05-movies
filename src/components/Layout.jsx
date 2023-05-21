@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
-const Layout = () => {
+export const Layout = () => {
   return (
     <div>
       <ul>
@@ -18,4 +18,4 @@ const Layout = () => {
     </div>
   );
 };
-export default Layout;
+
