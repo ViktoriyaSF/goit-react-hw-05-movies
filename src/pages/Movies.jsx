@@ -1,13 +1,39 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
+  const [movies, setMovies] = useState([
+    'movie-1',
+    'movie-2',
+    'movie-3',
+    'movie-4',
+  ]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  //або значення або пустий рядок
+  const movieId = searchParams.get('movieId') ?? '';
+
+  const visibleMovies = movies.filter(movie => movie.includes(movieId));
+
+  const updateQueryString = evt => {
+    if (evt.target.value === '') {
+      return setSearchParams({});
+    }
+    setSearchParams({ movieId: evt.target.value });
+  };
+
+  const location = useLocation();
+  console.log(location);
+
   return (
     <div>
-      {['movie-1', 'movie-2', 'movie-3', 'movie-4'].map(movie => {
+      <input type="text" value={movieId} onChange={updateQueryString}></input>
+      {visibleMovies.map(movie => {
         return (
-          <Link key={movie} to={`${movie}`}>
-            {movie}
-          </Link>
+          <li key={movie}>
+            <Link to={`${movie}`} state={{ from: location }}>
+              {movie}
+            </Link>
+          </li>
         );
       })}
     </div>
