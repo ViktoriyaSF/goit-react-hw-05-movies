@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { getMovieDetails } from 'service/api-movies';
+import { getMovieDetails, IMG_url } from 'service/api-movies';
 import noFilm from '../img/noFilm.jpg';
 
 const MovieDetails = () => {
@@ -11,7 +11,6 @@ const MovieDetails = () => {
 
   const { movieId } = useParams();
   console.log(movieId);
-  const IMG_url = 'https://image.tmdb.org/t/p/w300';
 
   useEffect(() => {
     const getDetails = async () => {
@@ -20,7 +19,7 @@ const MovieDetails = () => {
     };
     getDetails();
   }, [movieId]);
-
+  console.log(movieDetails);
   return (
     <>
       <Link to={backLinLocationRef.current}>Go bac</Link>
@@ -31,7 +30,7 @@ const MovieDetails = () => {
           <img
             src={
               movieDetails.poster_path
-                ? IMG_url + movieDetails.poster_path
+                ? IMG_url + 'w300' + movieDetails.poster_path
                 : noFilm
             }
             width="300"
