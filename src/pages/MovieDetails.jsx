@@ -1,6 +1,7 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'service/api-movies';
+import noFilm from '../img/noFilm.jpg';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
@@ -10,6 +11,7 @@ const MovieDetails = () => {
 
   const { movieId } = useParams();
   console.log(movieId);
+  const IMG_url = 'https://image.tmdb.org/t/p/w300';
 
   useEffect(() => {
     const getDetails = async () => {
@@ -26,17 +28,16 @@ const MovieDetails = () => {
         <div>This movie is not found</div>
       ) : (
         <div>
-          {movieDetails.poster_path ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w300${movieDetails.poster_path}`}
-              alt={movieDetails.title}
-            ></img>
-          ) : (
-            <img
-              src={`https://via.placeholder.com/300x400?text=No+Image`}
-              alt={movieDetails.title}
-            ></img>
-          )}
+          <img
+            src={
+              movieDetails.poster_path
+                ? IMG_url + movieDetails.poster_path
+                : noFilm
+            }
+            width="300"
+            height="450"
+            alt={movieDetails.title}
+          ></img>
           <div>
             <h2>{movieDetails.title || movieDetails.name}</h2>
             <p>User Score: {Math.round(movieDetails.vote_average * 10)}%</p>
