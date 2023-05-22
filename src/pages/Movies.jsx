@@ -30,7 +30,7 @@ const Movies = () => {
     }
     setSearchParams({ movieId: movieSearchValue });
   };
-  console.log(movieId);
+  // console.log(movieId);
 
   return (
     <div>

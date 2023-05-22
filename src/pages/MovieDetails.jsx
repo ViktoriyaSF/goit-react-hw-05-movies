@@ -1,18 +1,48 @@
-import { Suspense, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { getMovieDetails } from 'service/api-movies';
 
 const MovieDetails = () => {
+  const [movieDetails, setMovieDetails] = useState([]);
+
   const location = useLocation();
   const backLinLocationRef = useRef(location.state?.from ?? '/movies');
 
   const { movieId } = useParams();
-  // console.log(movieId);
-  // console.log(location);
-  // console.log(location.state);
-  // console.log(backLinLocationRef.current);
+  console.log(movieId);
+
+  useEffect(() => {
+    const getDetails = async () => {
+      const results = await getMovieDetails(movieId);
+      console.log(results);
+      setMovieDetails(results);
+    };
+    getDetails();
+  }, [movieId]);
+
   return (
     <>
-      <div> MovieDetails :{movieId}</div>
+      <div>
+        {movieDetails.poster_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w300${movieDetails.poster_path}`}
+            alt={movieDetails.title}
+          ></img>
+        ) : (
+          <img
+            src={`https://via.placeholder.com/300x400?text=No+Image`}
+            alt={movieDetails.title}
+          ></img>
+        )}
+        <div>
+          <h2>{movieDetails.title || movieDetails.name}</h2>
+          <p>User Score: {Math.round(movieDetails.vote_average * 10)}%</p>
+          <h3>Overview</h3>
+          <p>{movieDetails.overview}</p>
+          <h3>Genres</h3>
+        </div>
+      </div>
+
       <Link to={backLinLocationRef.current}>RETURN</Link>
       <ul>
         <li>
