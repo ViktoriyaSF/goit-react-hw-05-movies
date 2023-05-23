@@ -16,7 +16,7 @@ const Cast = () => {
     getCast();
   }, [movieId]);
 
-  console.log(cast);
+  // console.log(cast);
 
   // useEffect(() => {
   //   const getCast = async () => {
@@ -33,8 +33,9 @@ const Cast = () => {
 
   return (
     <>
+      <h2>Cast</h2>
       {cast.length === 0 ? (
-        <div>This movie is not found</div>
+        <p>This movie is not found</p>
       ) : (
         <ul>
           {cast.map(actor => {

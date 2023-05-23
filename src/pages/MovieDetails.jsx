@@ -47,14 +47,18 @@ const MovieDetails = () => {
         </div>
       )}
 
-      <ul>
-        <li>
-          <Link to="cast"> cast ✨</Link>
-        </li>
-        <li>
-          <Link to="reviews"> reviews 💖</Link>
-        </li>
-      </ul>
+      <div>
+        <h2>Additional information</h2>
+        <ul>
+          <li>
+            <Link to="cast"> cast ✨</Link>
+          </li>
+          <li>
+            <Link to="reviews"> reviews 💖</Link>
+          </li>
+        </ul>
+      </div>
+
       <Suspense fallback={<div>Loading subpage...</div>}>
         <Outlet />
       </Suspense>
