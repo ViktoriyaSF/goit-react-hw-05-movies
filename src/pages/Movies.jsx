@@ -16,7 +16,7 @@ const Movies = () => {
     if (movieId === '' || movieId === null) return;
     const getMovies = async () => {
       const { results } = await fetchSearchMovies(movieId);
-      console.log(results);
+      // console.log(results);
       setMovies(results);
     };
 
