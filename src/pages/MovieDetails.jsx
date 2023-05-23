@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { getMovieDetails, IMG_url } from 'service/api-movies';
+import { fetchMovieDetails, IMG_url } from 'service/api-movies';
 import noFilm from '../img/noFilm.jpg';
 
 const MovieDetails = () => {
@@ -10,19 +10,18 @@ const MovieDetails = () => {
   const backLinLocationRef = useRef(location.state?.from ?? '/movies');
 
   const { movieId } = useParams();
-  console.log(movieId);
 
   useEffect(() => {
     const getDetails = async () => {
-      const results = await getMovieDetails(movieId);
+      const results = await fetchMovieDetails(movieId);
       setMovieDetails(results);
     };
     getDetails();
   }, [movieId]);
-  console.log(movieDetails);
+
   return (
     <>
-      <Link to={backLinLocationRef.current}>Go bac</Link>
+      <Link to={backLinLocationRef.current}>Go back</Link>
       {movieDetails.length === 0 ? (
         <div>This movie is not found</div>
       ) : (

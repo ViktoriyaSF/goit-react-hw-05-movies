@@ -15,19 +15,19 @@ export const fetchSearchMovies = async query => {
   const { data: movies } = await axios.get(queryString);
   return movies;
 };
-export const getMovieDetails = async movieId => {
+export const fetchMovieDetails = async movieId => {
   const queryString = `movie/${movieId}$?api_key=${KEY}&language=en-US`;
   const { data: movie } = await axios.get(queryString);
   return movie;
 };
-export const getMovieCast = async movieId => {
-  const queryString = `movie/${movieId}/credits$?api_key=${KEY}&language=en-US`;
+export const fetchMovieCast = async movieId => {
+  const queryString = `movie/${movieId}/credits?api_key=${KEY}&language=en-US`;
   const { data } = await axios.get(queryString);
   return data;
 };
 
-export const getMovieReviews = async movieId => {
-  const queryString = `movie/${movieId}/reviews$?api_key=${KEY}&language=en-US`;
+export const fetchMovieReviews = async movieId => {
+  const queryString = `movie/${movieId}/reviews?api_key=${KEY}&language=en-US`;
   const { data } = await axios.get(queryString);
   return data;
 };

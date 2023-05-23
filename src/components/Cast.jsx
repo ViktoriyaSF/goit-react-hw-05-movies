@@ -1,46 +1,57 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { getMovieCast, IMG_url } from 'service/api-movies';
-import noFilm from '../img/noFilm.jpg';
+import { fetchMovieCast, IMG_url } from '../service/api-movies';
+import avatar from '../img/avatar.jpg';
 
 const Cast = () => {
-  const [movieCast, setMovieCast] = useState([]);
+  const [cast, setCast] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
     const getCast = async () => {
-      const { results } = await getMovieCast(movieId);
-      console.log(results);
-      setMovieCast(results);
+      const { cast } = await fetchMovieCast(movieId);
+      setCast(cast);
     };
-
     getCast();
   }, [movieId]);
-  console.log(movieCast);
+
+  console.log(cast);
+
+  // useEffect(() => {
+  //   const getCast = async () => {
+  //     try {
+  //       const { cast } = await fetchMovieCast(movieId);
+  //       setCast(cast);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   getCast();
+  // }, [movieId]);
 
   return (
     <>
-      <div>Cast {movieId}</div>
-      {movieCast.length === 0 ? (
+      {cast.length === 0 ? (
         <div>This movie is not found</div>
       ) : (
         <ul>
-          {movieCast.map(cast => {
+          {cast.map(actor => {
             return (
-              <li key={cast.cast_id}>
+              <li key={actor.cast_id}>
                 <img
                   src={
-                    cast.profile_path
-                      ? IMG_url + '200w' + cast.profile_path
-                      : noFilm
+                    actor.profile_path
+                      ? IMG_url + 'w200' + actor.profile_path
+                      : avatar
                   }
                   width="200"
-                  height="450"
-                  alt={cast.name}
+                  height="300"
+                  alt={actor.name}
                 ></img>
-                <p> {cast.name}</p>
-                <p>Character: {cast.character}</p>
+                <p> {actor.name}</p>
+                <p>Character: {actor.character}</p>
               </li>
             );
           })}
