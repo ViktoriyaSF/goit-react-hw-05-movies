@@ -1,8 +1,17 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { fetchMovieCast, IMG_url } from '../service/api-movies';
-import avatar from '../img/avatar.jpg';
+import { fetchMovieCast, IMG_url } from '../../service/api-movies';
+import avatar from '../../img/avatar.jpg';
+
+import {
+  CastHeader,
+  CastInfo,
+  CastList,
+  CastListItem,
+  CastName,
+  Wrapper,
+} from './StyledCast';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -32,33 +41,33 @@ const Cast = () => {
   // }, [movieId]);
 
   return (
-    <>
-      <h2>Cast</h2>
+    <Wrapper>
+      {cast.length !== 0 && <CastHeader>Cast</CastHeader>}
       {cast.length === 0 ? (
-        <p>This movie is not found</p>
+        <h2>This movie is not found</h2>
       ) : (
-        <ul>
+        <CastList>
           {cast.map(actor => {
             return (
-              <li key={actor.cast_id}>
+              <CastListItem key={actor.cast_id}>
                 <img
                   src={
                     actor.profile_path
                       ? IMG_url + 'w200' + actor.profile_path
                       : avatar
                   }
-                  width="200"
-                  height="300"
                   alt={actor.name}
                 ></img>
-                <p> {actor.name}</p>
-                <p>Character: {actor.character}</p>
-              </li>
+                <CastInfo>
+                  <CastName> {actor.name}</CastName>
+                  <p>Character: {actor.character}</p>
+                </CastInfo>
+              </CastListItem>
             );
           })}
-        </ul>
+        </CastList>
       )}
-    </>
+    </Wrapper>
   );
 };
 

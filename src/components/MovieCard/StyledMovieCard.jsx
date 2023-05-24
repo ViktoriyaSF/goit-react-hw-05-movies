@@ -40,4 +40,8 @@ export const ListItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
+  &:hover,
+  &:focus {
+    transform: scale(1.25);
+  }
 `;

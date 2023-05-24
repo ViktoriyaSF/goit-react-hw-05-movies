@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 const MovieCard = ({ movieDetails }) => {
   const score = Math.round(movieDetails.vote_average * 10);
   return (
-    <p>
+    <>
       <MovieContainer>
         <img
           src={
@@ -54,7 +54,7 @@ const MovieCard = ({ movieDetails }) => {
           </ListItem>
         </List>
       </MoreInfoWrapper>
-    </p>
+    </>
   );
 };
 
