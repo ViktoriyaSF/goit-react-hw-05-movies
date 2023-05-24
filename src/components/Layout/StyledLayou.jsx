@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
   padding: 20px 30px;
+  height: 60px;
   text-align: center;
   box-shadow: 0px 4px 4px #d3d3d3;
   background: rgb(174, 238, 203);
@@ -17,9 +18,6 @@ export const StyledHeader = styled.header`
     text-align: center;
     justify-content: center;
     gap: 20px;
-  }
-  li::marker {
-    unicode-bidi: none;
   }
 `;
 export const StyledNavLink = styled(NavLink)`

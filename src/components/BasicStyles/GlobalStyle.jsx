@@ -31,8 +31,11 @@ p {
 ul, li {
 	margin: 0;
 	padding: 0;
-	/* list-style: none; */
+	list-style: none;
     text-decoration: none
+}
+a {
+  text-decoration: none
 }
 img {
   display: block;
@@ -40,7 +43,11 @@ img {
   height: auto;
 }
 button {
-  display: block;
+  margin-left: 10px;
+  display: flex;
+   text-align: center;
+    justify-content: center;
+    gap: 8px;
   font-family: inherit;
   cursor: pointer;
   border: none;

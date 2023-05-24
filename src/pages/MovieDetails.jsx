@@ -1,53 +1,46 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { fetchMovieDetails, IMG_url } from 'service/api-movies';
-import noFilm from '../img/noFilm.jpg';
+import { fetchMovieDetails } from 'service/api-movies';
+import MovieCard from 'components/MovieCard/MovieCard';
+import { Loader } from 'components/Loader/Loader';
+import { FiChevronsLeft } from 'react-icons/fi';
+import { BtnUp } from 'components/BtnUP/BtnUp';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
-  const backLinLocationRef = useRef(location.state?.from ?? '/movies');
+  const backLinLocationRef = useRef(location.state?.from ?? '/');
 
   const { movieId } = useParams();
 
   useEffect(() => {
     const getDetails = async () => {
+      setIsLoading(true);
       const results = await fetchMovieDetails(movieId);
       setMovieDetails(results);
+      setIsLoading(false);
     };
     getDetails();
   }, [movieId]);
 
   return (
     <>
-      <Link to={backLinLocationRef.current}>Go back</Link>
+      <Link to={backLinLocationRef.current}>
+        <button type="button">
+          <FiChevronsLeft size="1.25em" />
+          Go back
+        </button>
+      </Link>
+      <BtnUp />
+      {isLoading && <Loader />}
       {movieDetails.length === 0 ? (
         <div>This movie is not found</div>
       ) : (
-        <div>
-          <img
-            src={
-              movieDetails.poster_path
-                ? IMG_url + 'w300' + movieDetails.poster_path
-                : noFilm
-            }
-            width="300"
-            height="450"
-            alt={movieDetails.title}
-          ></img>
-          <div>
-            <h2>{movieDetails.title || movieDetails.name}</h2>
-            <p>User Score: {Math.round(movieDetails.vote_average * 10)}%</p>
-            <h3>Overview</h3>
-            <p>{movieDetails.overview}</p>
-            <h3>Genres</h3>
-            <p>{movieDetails.genres.map(genre => genre.name).join(' / ')}</p>
-          </div>
-        </div>
+        <MovieCard movieDetails={movieDetails} />
       )}
 
-      <div>
+      {/* <div>
         <h2>Additional information</h2>
         <ul>
           <li>
@@ -57,7 +50,7 @@ const MovieDetails = () => {
             <Link to="reviews"> reviews 💖</Link>
           </li>
         </ul>
-      </div>
+      </div> */}
 
       <Suspense fallback={<div>Loading subpage...</div>}>
         <Outlet />
