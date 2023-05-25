@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from 'service/api-movies';
-import { MovieContainer, Title, Items, Text } from './StyledReviews';
+import { ReviewsContainer, Title, Items, Text } from './StyledReviews';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -17,7 +17,7 @@ const Reviews = () => {
   // console.log(reviews);
 
   return (
-    <MovieContainer>
+    <ReviewsContainer>
       {reviews.length !== 0 && <Title>Reviews</Title>}
       {reviews.length === 0 ? (
         <h2>We don't have any reviews for this movie yet</h2>
@@ -33,7 +33,7 @@ const Reviews = () => {
           })}
         </ul>
       )}
-    </MovieContainer>
+    </ReviewsContainer>
   );
 };
 export default Reviews;

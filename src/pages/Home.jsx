@@ -12,33 +12,16 @@ const Home = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      try {
-        setIsLoading(true);
-        setError(false);
-        const { results } = await fetchTrendingMovies();
-        // console.log(results);
-        setMovies(results);
-      } catch (error) {
-        setError('sorry');
-      } finally {
-        setIsLoading(false);
-      }
+      setIsLoading(true);
+      setError(false);
+      const { results } = await fetchTrendingMovies();
+      // console.log(results);
+      setMovies(results);
+      setIsLoading(false);
     };
 
     getMovies();
   }, []);
-  // useEffect(() => {
-  //   const getMovies = async () => {
-  //     setIsLoading(true);
-  //     setError(false);
-  //     const { results } = await fetchTrendingMovies();
-  //     // console.log(results);
-  //     setMovies(results);
-  //     setIsLoading(false);
-  //   };
-
-  //   getMovies();
-  // }, []);
 
   return (
     <>
@@ -49,18 +32,25 @@ const Home = () => {
       )}
       {isLoading && <Loader />}
       {movies && <MovieList movies={movies} />}
-      {/* <ul>
-        {movies.map(movie => {
-          return (
-            <li key={movie.id}>
-              <Link to={`movies/${movie.id}`} state={{ from: location }}>
-                {movie.title || movie.name}
-              </Link>
-            </li>
-          );
-        })}
-      </ul> */}
     </>
   );
 };
 export default Home;
+
+// useEffect(() => {
+//   const getMovies = async () => {
+//     try {
+//       setIsLoading(true);
+//       setError(false);
+//       const { results } = await fetchTrendingMovies();
+//       // console.log(results);
+//       setMovies(results);
+//     } catch (error) {
+//       setError('sorry');
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   getMovies();
+// }, []);

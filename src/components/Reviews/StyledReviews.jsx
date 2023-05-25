@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MovieContainer = styled.div`
+export const ReviewsContainer = styled.div`
   margin-right: 10px;
   margin-left: 10px;
   display: flex;
