@@ -28,6 +28,8 @@ const SearchMovies = ({ onSubmit }) => {
 
 export default SearchMovies;
 
+SearchMovies.propTypes = { onSubmit: PropTypes.func.isRequired };
+
 // const updateQueryString = evt => {
 //   const movieSearchValue = evt.target.value;
 //   if (movieSearchValue === '') {
