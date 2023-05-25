@@ -5,14 +5,15 @@ export const Form = styled.form`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 40px auto;
+  margin-top: 40px;
+  gap: 0;
 `;
 
 export const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 8px;
-  margin-right: 15px;
+  /* margin-right: 15px; */
   font-size: 16px;
   text-align: center;
 `;
