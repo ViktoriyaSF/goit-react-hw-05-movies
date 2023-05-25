@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Loader } from 'components/Loader/Loader';
 
 import { fetchMovieCast, IMG_url } from '../../service/api-movies';
 import avatar from '../../img/avatar.jpg';
@@ -16,11 +17,14 @@ import {
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getCast = async () => {
+      setIsLoading(true);
       const { cast } = await fetchMovieCast(movieId);
       setCast(cast);
+      setIsLoading(false);
     };
     getCast();
   }, [movieId]);
@@ -42,10 +46,10 @@ const Cast = () => {
 
   return (
     <Wrapper>
+      {isLoading && <Loader />}
+      {!cast && <h2>This movie is not found</h2>}
       {cast.length !== 0 && <CastHeader>Cast</CastHeader>}
-      {cast.length === 0 ? (
-        <h2>This movie is not found</h2>
-      ) : (
+      {cast.length !== 0 && (
         <CastList>
           {cast.map(actor => {
             return (

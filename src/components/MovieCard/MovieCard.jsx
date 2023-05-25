@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 
 const MovieCard = ({ movieDetails }) => {
   const score = Math.round(movieDetails.vote_average * 10);
+
   return (
     <>
       <MovieContainer>
@@ -47,10 +48,10 @@ const MovieCard = ({ movieDetails }) => {
         <MovieTitle>Additional information</MovieTitle>
         <List>
           <ListItem>
-            <Link to="cast"> cast ✨</Link>
+            <Link to="cast">Cast ✨</Link>
           </ListItem>
           <ListItem>
-            <Link to="reviews"> reviews 💖</Link>
+            <Link to="reviews">Reviews 💖</Link>
           </ListItem>
         </List>
       </MoreInfoWrapper>
