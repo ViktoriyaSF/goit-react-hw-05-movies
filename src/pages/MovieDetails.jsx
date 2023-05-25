@@ -34,23 +34,8 @@ const MovieDetails = () => {
       </Link>
       <BtnUp />
       {isLoading && <Loader />}
-      {movieDetails.length === 0 ? (
-        <div>This movie is not found</div>
-      ) : (
-        <MovieCard movieDetails={movieDetails} />
-      )}
-
-      {/* <div>
-        <h2>Additional information</h2>
-        <ul>
-          <li>
-            <Link to="cast"> cast ✨</Link>
-          </li>
-          <li>
-            <Link to="reviews"> reviews 💖</Link>
-          </li>
-        </ul>
-      </div> */}
+      {movieDetails.length !== 0 && <MovieCard movieDetails={movieDetails} />}
+      {!movieDetails && <div>This movie is not found</div>}
 
       <Suspense fallback={<h2>Loading subpage...</h2>}>
         <Outlet />
